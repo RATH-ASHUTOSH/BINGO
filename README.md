@@ -1,5 +1,5 @@
 # BINGO
 BINGO android application.
-It is basically an android application which will help the user to convert his/her trash to money.
-This app also provide the automatic opening of bin,previous trash history etc.
+same as description file
+this is user app of BINGO. in this app users can scan the bar code attachted to the trash before throwing it into the collectible bin. this app also enables the user to unlock the bin once he/she reacges near the dustbin via wifi signals. the user can see their trash history and bingo cash collected for each recycylable item the user has contributed.
 
