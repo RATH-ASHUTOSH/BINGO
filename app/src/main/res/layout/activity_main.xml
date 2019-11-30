@@ -11,10 +11,10 @@
         android:id="@+id/tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="448dp"
         android:layout_marginTop="50dp"
-        android:hint="Lock status"
+        android:layout_marginBottom="448dp"
         android:gravity="center"
+        android:hint="Lock status"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -183,5 +183,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.308" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toStartOf="@+id/history"
+        app:layout_constraintStart_toEndOf="@+id/unlock"
+        app:layout_constraintTop_toBottomOf="@+id/tv" />
 
 </android.support.constraint.ConstraintLayout>

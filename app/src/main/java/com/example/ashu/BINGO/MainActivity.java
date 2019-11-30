@@ -5,9 +5,11 @@ import android.content.Intent;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -20,8 +22,10 @@ import java.net.URL;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
+import static android.support.constraint.Constraints.TAG;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    public static TextView textView, username, bincash,display,ruppee;
+    public static TextView textView, username, bincash,display,ruppee,timer;
     public String TAG = "Mainact";
     Button unlock, history, map, help, scan;
 
@@ -30,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         textView = findViewById(R.id.tv);
+        timer = findViewById(R.id.textView4);
 
         unlock = findViewById(R.id.unlock);
         history = findViewById(R.id.history);
@@ -98,8 +103,35 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String ssid = "test";
         String password = "password";
 
+
+        /*final int[] counter = {15};
+        new CountDownTimer(15000, 1000){
+            public void onTick(long millisUntilFinished){
+
+                timer.setText("Waits for:-"+String.valueOf(counter[0]));
+                counter[0]--;
+            }
+            public  void onFinish(){
+                timer.setText("");
+            }
+        }.start();*/
+
         //if(connectwifi(ssid,password)){
         connectwifi(ssid, password);
+        //final int counter = 15;
+        textView.setText("15");
+        new CountDownTimer(15000, 1000){
+            public void onTick(long millisUntilFinished){
+                String s= (String) textView.getText();
+                int counter=Integer.parseInt(s);
+                textView.setText("Waits for:-"+String.valueOf(counter));
+
+                counter--;
+            }
+            public  void onFinish(){
+                timer.setText("");
+            }
+        }.start();
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
@@ -112,6 +144,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 //Perform the doInBackground method, passing in our url
                 try {
                     result = getRequest.execute(myUrl).get();
+                    Log.d(TAG, "run: "+result);
                     textView.setText(result);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -120,7 +153,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     textView.setText(e.toString());
                 }
             }
-        }, 2000);
+        }, 5000);
     }
 
     private void connectwifi(String ssid, String password) {
@@ -129,6 +162,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         conf.SSID = "\"" + ssid + "\"";   // Please note the quotes. String should contain ssid in quotes
         conf.preSharedKey = "\"" + password + "\"";
         WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+        wifiManager.setWifiEnabled(false);
         wifiManager.setWifiEnabled(true);
         wifiManager.addNetwork(conf);
         List<WifiConfiguration> list = wifiManager.getConfiguredNetworks();
@@ -184,6 +218,7 @@ class HttpGetRequest extends AsyncTask<String, Void, String> {
         }
         catch(IOException e){
             e.printStackTrace();
+            Log.d("Mainact", "doInBackground: "+e);
             result = "The Bin can't be Unlock!."+"\nIts due to You are far away from Bin or some problem Occur"+"\nPLEASE TRY AGAIN";
         }
         return result;

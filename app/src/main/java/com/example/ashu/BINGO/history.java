@@ -34,7 +34,7 @@ public class history extends AppCompatActivity {
         ArrayAdapter adapter;
 
 
-        String myUrl = "http://192.168.43.116/Bingo/hist.php?uid=9246";
+        String myUrl = "https://recyclebingo.000webhostapp.com/hist.php?uid=9246";
         //Instantiate new instance of our class
         HttpGetRequest2 getRequest = new HttpGetRequest2();
         //Perform the doInBackground method, passing in                 our url

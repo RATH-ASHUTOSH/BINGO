@@ -9,6 +9,7 @@ import android.os.Vibrator;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.SparseArray;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -123,7 +124,9 @@ public class scan extends AppCompatActivity {
                 @Override
                 public void run() {
                     String val= (String) MainActivity.display.getText();
-                    String myUrl = "http://192.168.43.116/Bingo/mobd.php?uid=1&bid="+val;
+                    String TAG="scan2";
+                    Log.d(TAG, "run: "+val);
+                    String myUrl = "https://recyclebingo.000webhostapp.com/mobd.php?uid=1&bid="+val;
                     MainActivity.display.setText(val);
 
                     //String to place our result in
