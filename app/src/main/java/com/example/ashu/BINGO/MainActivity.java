@@ -119,7 +119,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //if(connectwifi(ssid,password)){
         connectwifi(ssid, password);
         //final int counter = 15;
-        textView.setText("15");
+        textView.setText("16");
         new CountDownTimer(15000, 1000){
             public void onTick(long millisUntilFinished){
                 String s= (String) textView.getText();
